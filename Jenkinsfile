@@ -34,25 +34,7 @@ pipeline {
                 }
             }
         }
-        stage('Installing Dependencies') {
-            steps {
-                sh 'npm install'
-                
-            }
-        }
-        stage('OWASP Dependency-Check Scan') {
-            steps {
-                    dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-                
-            }
-        }
-        stage('Trivy File Scan') {
-            steps {
-                sh 'trivy fs . > trivyfs.txt'
-                
-            }
-        }
+        
         stage('Ansible Docker') {
             steps {
                 dir('Ansible'){
