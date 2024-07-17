@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     tools {
-        jdk 'jdk'
+        jdk 'jdk17'
         nodejs 'nodejs'
     }
     environment  {
@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/uniquesreedhar/2048-app.git'
+                git branch: 'main', url: 'https://github.com/akaspatranobis/2048-Game-App-CI-CD.git'
             }
         }
         stage('Sonarqube Analysis') {
@@ -64,17 +64,17 @@ pipeline {
         }
         stage("TRIVY Image Scan") {
             steps {
-                sh 'trivy image sreedhar8897/2048-game:latest > trivyimage.txt' 
+                sh 'trivy image apatranobis59/2048-game:latest > trivyimage.txt' 
             }
         }
-        stage('k8s using ansible'){
-            steps{
-                dir('Ansible') {
-                    script{
-                        ansiblePlaybook credentialsId: 'SSH', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/', playbook: 'kube.yaml'
-                    }
-                } 
-            }
-        }
+        // stage('k8s using ansible'){
+        //     steps{
+        //         dir('Ansible') {
+        //             script{
+        //                 ansiblePlaybook credentialsId: 'SSH', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/', playbook: 'kube.yaml'
+        //             }
+        //         } 
+        //     }
+        // }
     }
 }

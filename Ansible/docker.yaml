@@ -13,7 +13,7 @@
         chdir: /var/lib/jenkins/workspace/2048-game
 
     - name: tag image
-      command: docker tag 2048-game ak1997/2048-game:latest 
+      command: docker tag 2048-game apatranobis59/2048-game:latest 
 
     - name: Log in to Docker Hub
       community.docker.docker_login:
@@ -22,7 +22,7 @@
         password: 
 
     - name: Push image
-      command: docker push ak1997/2048-game:latest
+      command: docker push apatranobis59/2048-game:latest
 
     - name: Run container
-      command: docker run -d --name 2048-game -p 80:80 ak1997/2048-game:latest
+      command: docker run -d --name 2048-game -p 80:80 apatranobis59/2048-game:latest
