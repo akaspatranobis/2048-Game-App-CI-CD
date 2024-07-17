@@ -49,14 +49,15 @@ pipeline {
                 sh 'trivy image apatranobis59/2048-game:latest > trivyimage.txt' 
             }
         }
-        // stage('k8s using ansible'){
-        //     steps{
-        //         dir('Ansible') {
-        //             script{
-        //                 ansiblePlaybook credentialsId: 'SSH', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/', playbook: 'kube.yaml'
-        //             }
-        //         } 
-        //     }
-        // }
+        
+        stage('k8s using ansible'){
+            steps{
+                dir('Ansible') {
+                    script{
+                        ansiblePlaybook credentialsId: 'SSH', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/', playbook: 'kube.yaml'
+                    }
+                } 
+            }
+        }
     }
 }
